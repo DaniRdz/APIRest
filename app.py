@@ -67,5 +67,14 @@ def guide_update(id):
     db.session.commit()
     return guide_schema.jsonify(guide)
 
+# Endpoit for deleting a record
+@app.route('/guide/<id>', methods={"DELETE"})
+def guide_delete(id):
+    guide = Guide.query.get(id)
+    db.session.delete(guide)
+    db.session.commit()
+
+    return "guide was successfully deleted"
+
 if __name__ == '__main__':
     app.run(debug=True)
